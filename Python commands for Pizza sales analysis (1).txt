@@ -1,0 +1,78 @@
+Pizza Sales analysis python:
+
+* remember this quote this can be used in interviews from our side to present our ideas, "IF YOU TORTURE THE DATA LONG ENOUGH, IT WILL CONFESS TO ANYTHING" said by ronald coase (nobel prize winner economist)
+* in powerBI BI Stands Business intellegence.
+
+
+1.) Start by loggin in to your kaggle account, then 
+    Step-1: import (upload) these 4 files.
+    Step-2: after uploading just start writing by importing libarires various libarires has different purposes, pandas is used to work with dataset, seaborn and matplotlib is used to plot graph.
+
+2.) import like this: 
+    code : order_details = pd.read_csv("/kaggle/input/pizza-sales-analysis-dataset/my_order_details.csv")
+    here, order_details is the datset which contains details of my_order_details.csv (kinda like renaming it).
+
+3.) then to see the basic structure and columns of the datset write command,
+    <df>.head()
+    <df> is dataframe 
+    code: order_details.head()
+* it only shows top 5 enteries and to show last 5 entries we write 'df.tail()'
+
+4.) similarly we have <df>.info() , also works same but it shows first five as well as last five netries of datset.
+
+5.) <df>.describe() ,it describes mathematical information about dataset, like mean,count, std deviation.
+
+6.) <df>.shape , it gives us rows X columns of datset.
+* here no paranthesis().
+
+7.) for finding null vales and to know how many null are thier in dtaset then,
+<df>.isnull().sum()
+* isnull() method gives true and falsewhether datset has null values or not, 
+* sum() method is used to sum up.
+
+8.) for knowing what are the names of columns in datset and what is ther type we write <df>.columns
+* here also, no paranthesis().
+
+9.) meaning if this, whic is used to find Max pizza price based on pizza id
+
+    1.) merged_pizza_db = pd.merge(pizza_types, pizzas, on='pizza_type_id')
+    2.) pizza_with_max_price = merged_pizza_db.loc[merged_pizza_db['price'].idxmax(), 'pizza_id']
+    3.) print(f"The Pizza with the highest price is: {pizza_with_max_price}")
+
+line 1.) means we merge two datsets names pizza_types & pizzas on the basis of pizza_type_id.
+here we use method merge to do this 
+code: new_db = pd.merge(a, b, on='common_value')
+
+line 2.) we make a new variable which will give us max price of pizza on the basis of id.
+here, we locate method that is .loc() and idmax() to find the max out of all dtaset.
+code: new_var = new_db.loc[new_db['column_which_you_are_interested_in'].idxmax(), 'on_what_basis_of_orignal_table']
+
+line 3.) means is simple we print it by using f-strings, just amethod in python to replace variable with a particular name, try to remember it from example of degree, suppose college wants to give degree but they don't want to manullly type then they do it on basis of existing databse of students, its struucture will remain same only name and marks chnages accoridng to student.
+
+
+10.) now to find max sales on a whih date 
+
+        1.) orders['order_date'] = pd.to_datetime(orders['order_date'])
+        2.) grouped_df = orders.groupby('order_date').size().reset_index(name='NumOrders')
+        3.) max_orders_date = grouped_df.loc[grouped_df['NumOrders'].idxmax(), 'order_date']
+        4.) formatted_date = max_orders_date.strftime('%A, %Y-%m-%d')
+        5.) print(f"The date with the maximum number of orders is: {formatted_date}")
+
+line 1.) means again simple we merge two datasets,
+
+line 2.) The resulting Dataframe grouped_df will have two columns 'order_date' and 'NumOrders', where 'order_date' contains unique dates, and 'NumOrders' contains the count of orders for each date. This DataFrame will provide an overview of the number of orders placed on different dates.
+
+line 3.) again same as line 2.) of previous point(9.)
+
+line 4.) gives date with time 
+
+line 5.) again f-string concept.
+
+11.) now some common columns problems like to find pizzas & order_details dataset where pizza_id is common in both.
+    code: merged_table = pizzas.merge(order_details, on='pizza_id')
+we creates a new variable which is formed by merging 'pizzas' database & order_details on basis of 'pizza_id'
+now we simply print it.
+
+# Thats it,Thank you.
+
+----------------------------------------------------------------
